@@ -5,11 +5,21 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const expressLayouts = require('express-ejs-layouts');
+const mongoose = require('mongoose');
 
 const indexRouter = require('./routes/index');
 const inventoryRouter = require('./routes/inventory');
 
 const app = express();
+
+mongoose.set('strictQuery', false);
+const mongoDB =
+  'mongodb+srv://royal2791:TP1ditYaoxz2vCpc@inventory-app.zupdadq.mongodb.net/?retryWrites=true&w=majority&appName=inventory-app';
+
+main().catch((err) => console.log(err));
+async function main() {
+  await mongoose.connect(mongoDB);
+}
 
 // view engine setup
 app.use(expressLayouts);
