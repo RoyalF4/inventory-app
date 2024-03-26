@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const Schema = mongoose.Schema;
+const { Schema } = mongoose;
 
 const ItemSchema = new Schema({
   name: { type: String, required: true, maxLength: 100 },
@@ -17,7 +17,7 @@ ItemSchema.virtual('url').get(function () {
 
 ItemSchema.virtual('price_formatted').get(function () {
   const localize = this.price.toLocaleString();
-  return `${localize} ${localize > 1 ? 'coins' : 'coin'}`;
+  return `${localize} ${this.price > 1 ? 'coins' : 'coin'}`;
 });
 
 module.exports = mongoose.model('Item', ItemSchema);

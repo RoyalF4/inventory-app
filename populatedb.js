@@ -1,7 +1,7 @@
 #! /usr/bin/env node
 
 console.log(
-  'This script populates some test category and items to your database. Specified database as argument - e.g.: node populatedb "mongodb+srv://royal2791:TP1ditYaoxz2vCpc@inventory-app.zupdadq.mongodb.net/?retryWrites=true&w=majority&appName=inventory-app"'
+  'This script populates some test category and items to your database. Specified database as argument - e.g.: node populatedb "mongodb+srv://royal2791:TP1ditYaoxz2vCpc@inventory-app.zupdadq.mongodb.net/inventory-app?retryWrites=true&w=majority&appName=inventory-app"'
 );
 
 // Get arguments passed on command line
@@ -14,6 +14,7 @@ const categories = [];
 const items = [];
 
 const mongoose = require('mongoose');
+
 mongoose.set('strictQuery', false);
 
 const mongoDB = userArgs[0];
@@ -34,7 +35,7 @@ async function main() {
 // genre[0] will always be the Fantasy genre, regardless of the order
 // in which the elements of promise.all's argument complete.
 async function categoryCreate(index, name, description) {
-  const category = new Category({ name: name, description: description });
+  const category = new Category({ name, description });
   await category.save();
   categories[index] = category;
   console.log(`Added category: ${name}`);
@@ -50,12 +51,12 @@ async function itemCreate(
   members
 ) {
   const itemDetail = {
-    name: name,
-    description: description,
-    category: category,
-    price: price,
-    number_in_stock: number_in_stock,
-    members: members,
+    name,
+    description,
+    category,
+    price,
+    number_in_stock,
+    members,
   };
 
   const item = new Item(itemDetail);

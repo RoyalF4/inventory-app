@@ -13,9 +13,11 @@ const inventoryRouter = require('./routes/inventory');
 const app = express();
 
 mongoose.set('strictQuery', false);
+// eslint-disable-next-line operator-linebreak
 const mongoDB =
-  'mongodb+srv://royal2791:TP1ditYaoxz2vCpc@inventory-app.zupdadq.mongodb.net/?retryWrites=true&w=majority&appName=inventory-app';
+  'mongodb+srv://royal2791:TP1ditYaoxz2vCpc@inventory-app.zupdadq.mongodb.net/inventory-app?retryWrites=true&w=majority';
 
+// eslint-disable-next-line no-use-before-define, no-console
 main().catch((err) => console.log(err));
 async function main() {
   await mongoose.connect(mongoDB);
