@@ -1,0 +1,73 @@
+<h1>Create Item</h1>
+<form method="post">
+  <div class="form-group">
+    <label for="name">Name:</label>
+    <input
+      type="text"
+      id="name"
+      name="name"
+      value="<%= typeof name === 'undefined' ? '' : name %>"
+      required
+    />
+  </div>
+  <div class="form-group">
+    <label for="description">Description:</label>
+    <textarea type="text" id="description" name="description" required>
+<%= typeof description === 'undefined' ? '' : description %></textarea
+    >
+  </div>
+  <div class="form-group">
+    <label for="category">Category:</label>
+    <select name="category" id="category" required>
+      <option value="">--Please select a Category--</option>
+      <% categories.forEach(categorySelect => { %> <% if (categorySelect.name
+      === category.name) { %>
+      <option value="<%= categorySelect.name %>" selected>
+        <%= categorySelect.name %>
+      </option>
+      <% } else { %>
+      <option value="<%= categorySelect.name %>">
+        <%= categorySelect.name %>
+      </option>
+      <% }}) %>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="price">Price:</label>
+    <input
+      type="number"
+      id="price"
+      name="price"
+      min="1"
+      value="<%= typeof price === 'undefined' ? '1' : price %>"
+      required
+    />
+  </div>
+  <div class="form-group">
+    <label for="number_in_stock">Stock:</label>
+    <input
+      type="number"
+      id="number_in_stock"
+      name="number_in_stock"
+      value="<%= typeof stock === 'undefined' ? '1' : stock %>"
+      required
+    />
+  </div>
+  <div class="form-group">
+    <label for="members">Members:</label>
+    <% if (members) { %>
+    <input type="checkbox" id="members" name="members" checked />
+    <% } else { %>
+    <input type="checkbox" id="members" name="members" />
+    <% } %>
+  </div>
+  <button type="submit">Submit</button>
+</form>
+
+<% if (typeof errors !== 'undefined') { %>
+<ul>
+  <% errors.forEach(error => { %>
+  <li><%= error.msg %></li>
+  <% }) %>
+</ul>
+<% } %>

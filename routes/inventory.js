@@ -9,11 +9,19 @@ const router = express.Router();
 router.get('/', categoryController.index);
 
 // categories
+router.get('/category/create', categoryController.category_create_get);
+
+router.post('/category/create', categoryController.category_create_post);
+
 router.get('/category/:id', categoryController.category_detail);
 
 router.get('/categories', categoryController.category_list);
 
 // items
+router.get('/item/create', itemController.item_create_get);
+
+router.post('/item/create', itemController.item_create_post);
+
 router.get('/item/:id', itemController.item_detail);
 
 router.get('/items', itemController.item_list);

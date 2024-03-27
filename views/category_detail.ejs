@@ -1,6 +1,9 @@
 <h1><%= category.name %></h1>
+<h3><%= category.description %></h3>
 <ul>
-  <% items.forEach(item => { %>
+  <% if (items.length) { %> <% items.forEach(item => { %>
   <li><a href="<%= item.url %>"><%= item.name %></a></li>
-  <% }) %>
+  <% }) %> <% } else { %>
+  <li>There are no items for this category.</li>
+  <% } %>
 </ul>
